@@ -15,6 +15,7 @@ st.title("🚗 Webapp Ketersediaan Lot Parkir Real-Time")
 st.markdown("---")
 
 # --- 2. FUNGSI KONEKSI DATABASE ---
+import json # Pastikan ini ada di paling atas atau di dalam fungsi
 def Ambil_Data_Sheets():
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
     

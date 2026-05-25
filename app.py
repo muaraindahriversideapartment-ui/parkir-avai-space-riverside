@@ -17,7 +17,11 @@ st.markdown("---")
 # --- 2. FUNGSI KONEKSI DATABASE ---
 def Ambil_Data_Sheets():
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
-    creds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
+    
+    # KUNCI UTAMA: Ganti baca file jadi baca Streamlit Secrets TOML
+    creds_dict = st.secrets["gcp_service_account"]
+    creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
+    
     client = gspread.authorize(creds)
     
     url_sheet = "https://docs.google.com/spreadsheets/d/1e7xfzEg4eq23Q9DKrFtpR3CPe6TZu6caf8VK_kySwMM/edit"
@@ -27,7 +31,6 @@ def Ambil_Data_Sheets():
     setting_sheet = spreadsheet.worksheet("Setting")
     
     return log_sheet, setting_sheet
-
 try:
     log_sheet, setting_sheet = Ambil_Data_Sheets()
     st.sidebar.success("⚡ Database Connected!")
